@@ -1,17 +1,10 @@
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass
 from typing import List, Set, Type
 
 import src.model.exceptions as model_exceptions
-
-
-@dataclass(frozen=True)
-class Card:
-    """Base class representing a card instance"""
-
-    name: str
+from src.model.card import Card
 
 
 class Encyclopedia:
@@ -65,24 +58,3 @@ class Deck:
 
     def __len__(self) -> int:
         return len(self.cards)
-
-
-if __name__ == "__main__":
-
-    @dataclass(frozen=True)
-    class TestCardsA(Card):
-        name: str
-
-    card_a = TestCardsA(name="foo")
-    card_b = TestCardsA(name="bar")
-    card_c = TestCardsA(name="baz")
-
-    codex = Encyclopedia(TestCardsA)
-    codex.add({card_a, card_b, card_c})
-
-    deck = Deck(encyclopedia=codex, cards=[card_a, card_a, card_b, card_c])
-
-    print(deck)
-
-    codex_deck = Deck.from_encyclopedia(codex)
-    print(codex_deck)

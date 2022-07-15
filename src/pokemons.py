@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from enum import Enum
 from typing import Tuple
 
-from model.model import Card
+from model.collections import Card
 
 
 class PokemonType(Enum):
