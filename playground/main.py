@@ -25,10 +25,11 @@ class PlayCards(Card):
 
 if __name__ == "__main__":
 
-    ace_of_spades = PlayCards(id=1, suite=Suits.Spades, rank=14)
-    queen_of_hearts = PlayCards(id=2, suite=Suits.Hearts, rank=12)
+    ace_of_spades = PlayCards(suite=Suits.Spades, rank=14)
+    queen_of_hearts = PlayCards(suite=Suits.Hearts, rank=12)
 
     deck = Deck(
+        ref="cards",
         cards_type=PlayCards,
         cards=[
             ace_of_spades,

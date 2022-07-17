@@ -1,17 +1,19 @@
 from __future__ import annotations
 
 import random
-from collections import Counter
+import uuid
 from typing import List, Type
 
 import src.model.exceptions as model_exceptions
-from src.model.card import Card
+from src.model import Card
 
 
 class Deck:
     """Class representing a deck build from cards of the same type."""
 
-    def __init__(self, cards_type: Type, cards: List[Card]) -> None:
+    def __init__(self, ref: str, cards_type: Type, cards: List[Card], parrent_ref: str = None) -> None:
+        self.reference = ref
+        self.parrent_reference = parrent_ref
         self.cards_type = cards_type
         self._validate_cards(cards)
         self.cards = cards
@@ -32,7 +34,9 @@ class Deck:
         """Returns a new deck created with cards that matche all passed arguemtns."""
         filtered_cards = [card for card in self.cards if card.matches_all(**kwargs)]
 
-        return Deck(cards_type=self.cards_type, cards=filtered_cards)
+        return Deck(
+            ref=uuid.uuid4(), cards_type=self.cards_type, cards=filtered_cards, parrent_ref=self.reference
+        )
 
     def shuffle(self) -> None:
         random.shuffle(self.cards)
@@ -43,6 +47,12 @@ class Deck:
         except IndexError:
             raise model_exceptions.DrawFromEmptyDeck()
 
+    def __contains__(self, card: Card) -> bool:
+        return card in self.cards
+
+    def __len__(self) -> int:
+        return len(self.cards)
+
     # def __str__(self):
     #     text = f"A deck of {self.cards_type.__name__}:"
     #     cards_count = Counter(self.cards)
@@ -50,9 +60,3 @@ class Deck:
     #         text += f"\n\t{card.name}: {count}"
 
     #     return text
-
-    def __contains__(self, card: Card) -> bool:
-        return card in self.cards
-
-    def __len__(self) -> int:
-        return len(self.cards)

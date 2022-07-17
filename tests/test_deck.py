@@ -1,6 +1,6 @@
 import pytest
 import src.model.exceptions as model_exceptions
-from src.model.deck import Deck
+from src.model import Deck
 
 from tests.fixtures import get_test_cards, get_test_deck
 
@@ -17,7 +17,7 @@ def test_creating_deck_with_missmatch_card_types_raises_error(get_test_cards):
     card_a1, _, card_b1 = get_test_cards
 
     with pytest.raises(model_exceptions.CardsTypeMissmatch):
-        _ = Deck(cards_type=type(card_a1), cards=[card_a1, card_b1])
+        _ = Deck(ref="test_deck", cards_type=type(card_a1), cards=[card_a1, card_b1])
 
 
 def test_adding_cards_to_deck(get_test_cards, get_test_deck):

@@ -8,8 +8,6 @@ from typing import Optional, Tuple
 class Card:
     """Base class representing a card instance."""
 
-    id: int
-
     def matches_all(self, **kwargs) -> bool:
         """Returns True if all arguments match with card's attributes.
 
@@ -83,4 +81,5 @@ class Card:
     #     return self.id == other.id
 
     def __gt__(self, other: Card):
-        return self.id > other.id
+        # return self.id > other.id
+        return str(self) > str(other)
