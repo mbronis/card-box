@@ -43,13 +43,13 @@ class Deck:
         except IndexError:
             raise model_exceptions.DrawFromEmptyDeck()
 
-    def __str__(self):
-        text = f"A deck of {self.cards_type.__name__}:"
-        cards_count = Counter(self.cards)
-        for card, count in cards_count.items():
-            text += f"\n\t{card.name}: {count}"
+    # def __str__(self):
+    #     text = f"A deck of {self.cards_type.__name__}:"
+    #     cards_count = Counter(self.cards)
+    #     for card, count in cards_count.items():
+    #         text += f"\n\t{card.name}: {count}"
 
-        return text
+    #     return text
 
     def __contains__(self, card: Card) -> bool:
         return card in self.cards
