@@ -10,14 +10,14 @@ from src.model.card import Card
 class Deck:
     """Class representing a deck build from cards of the same type."""
 
-    def __init__(self, cards: List[Card]) -> None:
-        self.card_type: Type = type(cards[0])
+    def __init__(self, cards_type: Type, cards: List[Card]) -> None:
+        self.cards_type = cards_type
         self._validate_cards(cards)
         self.cards = cards
 
     def _validate_cards(self, cards: List[Card]) -> None:
-        if not all(isinstance(card, self.card_type) for card in cards):
-            raise model_exceptions.CardsTypeMissmatch(self.card_type)
+        if not all(isinstance(card, self.cards_type) for card in cards):
+            raise model_exceptions.CardsTypeMissmatch(self.cards_type)
 
     def add(self, cards: List[Card]) -> None:
         self._validate_cards(cards)
@@ -27,12 +27,14 @@ class Deck:
         for card in cards:
             self.cards.remove(card)
 
-    # def filter(self, **kwargs) -> Deck:
-    #     """Creates a new deck by filtering cards with passed arguemnts."""
-    #     pass
+    def filter(self, **kwargs) -> Deck:
+        """Returns a new deck created with cards that matche all passed arguemtns."""
+        filtered_cards = [card for card in self.cards if card.matches_all(**kwargs)]
+
+        return Deck(cards_type=self.cards_type, cards=filtered_cards)
 
     def __str__(self):
-        text = f"A deck of {self.card_type.__name__}:"
+        text = f"A deck of {self.cards_type.__name__}:"
         cards_count = Counter(self.cards)
         for card, count in cards_count.items():
             text += f"\n\t{card.name}: {count}"
