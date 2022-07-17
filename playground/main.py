@@ -2,12 +2,10 @@ import os
 from dataclasses import dataclass
 from enum import Enum, auto
 
-from attr import asdict
-
 print(os.getcwd())
 
-from src.model.card import Card
-from src.model.deck import Deck
+from src.model import Card, Deck
+from src.repo import PickleRepository
 
 
 class Suits(Enum):
@@ -48,3 +46,9 @@ if __name__ == "__main__":
     print(queen_of_hearts.__class__.__name__)
     print(str(queen_of_hearts))
     # print(asdict(queen_of_hearts))
+
+    print("-------------> repo")
+    repo = PickleRepository()
+    repo.add(deck)
+
+    print(repo.decks.keys())

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from src.model.deck import Deck
+from src.model import Deck
 
 
 class AbstractRepository(ABC):
@@ -9,5 +9,5 @@ class AbstractRepository(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def add(self, reference: str) -> Deck:
+    def get(self, reference: str) -> Deck:
         raise NotImplementedError
