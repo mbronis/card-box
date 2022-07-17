@@ -6,7 +6,7 @@ from src.model import Card, Deck
 
 
 @pytest.fixture(scope="session")
-def get_test_cards() -> Tuple[Card]:
+def get_test_cards():
     @dataclass(frozen=True)
     class TestCardsA(Card):
         name: str
@@ -27,7 +27,7 @@ def get_test_cards() -> Tuple[Card]:
 
 
 @pytest.fixture()
-def get_test_deck(get_test_cards) -> Deck:
+def get_test_deck(get_test_cards):
     card_a1, card_a2, _ = get_test_cards
 
     deck = Deck(ref="test_deck", cards_type=type(card_a1), cards=[card_a1, card_a1, card_a2])

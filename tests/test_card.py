@@ -1,6 +1,3 @@
-from tests.fixtures import get_test_cards
-
-
 def test_match_all_str(get_test_cards):
     c1, *_ = get_test_cards
 

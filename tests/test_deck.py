@@ -2,8 +2,6 @@ import pytest
 import src.model.exceptions as model_exceptions
 from src.model import Deck
 
-from tests.fixtures import get_test_cards, get_test_deck
-
 
 def test_creating_deck(get_test_cards, get_test_deck):
     card_a1, *_ = get_test_cards
