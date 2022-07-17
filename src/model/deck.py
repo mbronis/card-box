@@ -53,6 +53,12 @@ class Deck:
     def __len__(self) -> int:
         return len(self.cards)
 
+    def __hash__(self) -> int:
+        return hash(self.reference)
+
+    def __eq__(self, other) -> bool:
+        return self.reference == other.reference
+
     # def __str__(self):
     #     text = f"A deck of {self.cards_type.__name__}:"
     #     cards_count = Counter(self.cards)
