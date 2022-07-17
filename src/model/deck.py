@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import random
 from collections import Counter
-from typing import List, Set, Type
+from typing import List, Type
 
 import src.model.exceptions as model_exceptions
 from src.model.card import Card
@@ -32,6 +33,15 @@ class Deck:
         filtered_cards = [card for card in self.cards if card.matches_all(**kwargs)]
 
         return Deck(cards_type=self.cards_type, cards=filtered_cards)
+
+    def shuffle(self) -> None:
+        random.shuffle(self.cards)
+
+    def draw(self) -> None:
+        try:
+            return self.cards.pop()
+        except IndexError:
+            raise model_exceptions.DrawFromEmptyDeck()
 
     def __str__(self):
         text = f"A deck of {self.cards_type.__name__}:"

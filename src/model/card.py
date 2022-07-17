@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Optional, Tuple
 
@@ -81,5 +82,5 @@ class Card:
     # def __eq__(self, other: Card) -> int:
     #     return self.id == other.id
 
-    # def __gt__(self, other: Card):
-    #     return self.id > other.id
+    def __gt__(self, other: Card):
+        return self.id > other.id
